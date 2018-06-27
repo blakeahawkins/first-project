@@ -20,18 +20,23 @@
         </div> <!--ends row 1-->
         <div class="row"> <!--starts row 2-->
                 <div class="card col-md-4">
+                <div class="card-header">Search Band and Date Range</div>
+                </br>
                 <form>
                     <div class="input-group mb-3">
                     <input type="text" class="form-control" id="band-input" placeholder="Search Band" aria-label="Search Band" aria-describedby="basic-addon2">
                     <button class="btn btn-outline-secondary" type="button">Search</button>
                     </div>
                     <div class="input-group mb-3">
-                    <input type="text" id="date-input" class="form-control" placeholder="Date Range" aria-label="Date Range" aria-describedby="basic-addon2">
+                    <input type="date" id="date-input" class="form-control" placeholder="Date Range" aria-label="Date Range" aria-describedby="basic-addon2">
                     <button class="btn btn-outline-secondary" type="button">Search</button>
                     </div>   
                 </form> 
                 </div> 
-                <div class="card col-md-4">Top 3 Songs</div>
+                <div class="card col-md-4">
+                    <div class="card-header">Top 3 Songs</div>
+                </div>
+                
             
                 <div class="card col-md-4" style="width: 18rem;">
                     <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Card image cap">
@@ -82,17 +87,5 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>    
 <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCLXyUhUnq6KT3IOsYNvWKYtnrGVXqZt08",
-    authDomain: "nrfpc-fdbbd.firebaseapp.com",
-    databaseURL: "https://nrfpc-fdbbd.firebaseio.com",
-    projectId: "nrfpc-fdbbd",
-    storageBucket: "",
-    messagingSenderId: "455767813152"
-  };
-  firebase.initializeApp(config);
-</script>
 </body>
 </html>
