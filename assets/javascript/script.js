@@ -8,3 +8,17 @@
     messagingSenderId: "455767813152"
   };
   firebase.initializeApp(config);
+
+function displayGigs() {
+  var queryURL = "https://rest.bandsintown.com/artists/" +
+    artistName + "/events?app_id=codingbootcamp&date=" + dateRange
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+  .then(function(response) {
+    $.each(response, function() {
+      
+    })
+  })
+}
