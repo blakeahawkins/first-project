@@ -9,8 +9,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato|Shrikhand" rel="stylesheet">
-    <script src="assets/javascript/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>    
     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="assets/javascript/script.js"></script>
+    <script src="assets/javascript/top-five-songs.js"></script>
 
 </head>
 <body>
@@ -44,14 +46,15 @@
                 </form> 
                 </div> 
                 <div class="card col-md-4">
-                    <div class="card-header">Top 3 Songs</div>
+                    <div class="card-header">Top 3 Songs (from last.fm)</div>
+                    <div class="card-body" id="top-songs"></div>
                 </div>
                 
             
                 <div class="card col-md-4" style="width: 18rem;">
                     <div class="card-header">Top Song Video</div>
                     <img class="card-img-top">
-                    <div class="card-body">
+                    <div class="card-body" id="top-video">
                     
                     </div>
                 </div>
@@ -97,7 +100,5 @@
     </div> <!--ends main cointainter-->
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>    
-<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 </body>
 </html>
