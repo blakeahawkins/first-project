@@ -29,21 +29,28 @@
                 <form>
                     <p>Search Band</p>
                     <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="band-input" placeholder="Radiohead" aria-label="Search Band" aria-describedby="basic-addon2">
-                    <button class="btn search-button" type="button">Search</button>
+                        <input type="text" class="form-control" id="band-input" placeholder="Radiohead" aria-label="Search Band" aria-describedby="basic-addon2">
                     </div>
-                    <p>Search City  or </br> <input type="checkbox" value="use-current" checked> Use Current<br></p> 
+                    <p>Search City or </br>
+                        <input type="checkbox" value="use-current" checked> Use Current
+                        <br>
+                    </p>
                     <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="location-input" placeholder="Kansas City" aria-label="Search Location" aria-describedby="basic-addon2">
-                            <button class="btn search-button" type="button">Search</button>
-                    </div>   
-                    <p>Date Range</p>
-                    <div class="input-group mb-3">
-                    <input type="date" id="date-input" class="form-control" placeholder="Date Range" aria-label="Date Range" aria-describedby="basic-addon2">
-                    <button class="btn search-button" type="button">Search</button>
+                        <input type="text" class="form-control" id="location-input" placeholder="Kansas City" aria-label="Search Location" aria-describedby="basic-addon2">
                     </div>
-                     
-                </form> 
+                    <p>Date Range or </br>
+                        <input type="checkbox" value="next-year" checked> Next Year
+                        <br>
+                    </p>
+                    <div class="input-group mb-3">
+                        <input type="date" id="start-date-input" class="form-control" placeholder="Date Range" aria-label="Date Range" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="date" id="end-date-input" class="form-control" placeholder="Date Range" aria-label="Date Range" aria-describedby="basic-addon2">
+                    </div>
+                    <button id="submit-search" class="btn search-button" type="button">Search</button>
+                    <br>
+                </form>
                 </div> 
                 <div class="card col-md-4">
                     <div class="card-header">Top 3 Songs (from last.fm)</div>
@@ -99,6 +106,7 @@
 
     </div> <!--ends main cointainter-->
 
+    <script src="assets/javascript/script.js"></script>
 
 </body>
 </html>
