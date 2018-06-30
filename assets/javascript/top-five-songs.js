@@ -3,92 +3,158 @@
 // Add JS Code below
 $(document).ready(function() {
 
-    // clear out any prior lists
+    // clear out any prior song lists and videos
     $("#top-songs").empty();
+    $("#top-video").empty();
 
     // Grabbing and storing the selected artist property value from the button
-    var bandInput = $("#band-input");
-    // var selectedArtist = $(this).attr("selected-artist");
+    var bandInput = "";
+    var results = "";
+    var topSong = "";
+
+    $(".search-button").on("click", function() {
+        console.log("Button clicked");
+
+        bandInput = $("#band-input").val().trim();
+        console.log("Artist Requested: " + bandInput);
+
+        printSongs();
+        addVideo();
+    });
 
 
-    // Constructing a queryURL using the topic name
-    // var queryURL = "http://ws.audioscrobbler.com/2.0/" +
-    // topic + "/2.0/?method=artist.gettoptracks&artist=cher&api_key=YOUR_API_KEY&format=json";
-
-    //  Params
-    //      artist (Required (unless mbid)] : The artist name
-    //      mbid (Optional) : The musicbrainz id for the artist
-    //      autocorrect[0|1] (Optional) : Transform misspelled artist names into correct artist names, returning the correct version instead. The corrected artist name will be returned in the response.
-    //      page (Optional) : The page number to fetch. Defaults to first page.
-    //      limit (Optional) : The number of results to fetch per page. Defaults to 50.
-    //      api_key (Required) : A Last.fm API key.
-    // Last.fm API key: 8ebc9b04f203d069a8e6992620b4b37b
-
-    var queryURL1 = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + bandInput + 
-    "&api_key=8ebc9b04f203d069a8e6992620b4b37b&format=json";
-
-    var queryURL2 = ""; 
 
     function printSongs() {
-
+        //Empty the div with the top-songs ID
+        $("#top-songs").empty();
+    
+        var queryURL1 = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + bandInput + 
+        "&api_key=8ebc9b04f203d069a8e6992620b4b37b&format=json";
+        
         // Performing an AJAX request with the queryURL
         $.ajax({
         url: queryURL1,
         method: "GET"
         }).then(function(response) {
-            console.log(queryURL);
-
+            console.log("queryURL1: " + queryURL1);
             console.log(response);
 
-            var results = response.toptracks.track;
+            results = response.toptracks.track;
+            console.log(response.toptracks.track);
 
-
-            // Looping through each result item
-            for (var i = 0; i < 5; i++) {
+            // Looping through the top 3 songs of each result
+            for (var i = 0; i < 3; i++) {
 
                 // Creating and storing a div tag
                 var trackDiv = $("<div class='track'>");
         
                 // Creating a paragraph tag with the result item's name
-                var pName = $("<p>").text("Track Name: " + results[i].name);
+                var pName = $("<p>").text("Number " + (i+1) + " Song: " + results[i].name);
         
-                // Creating and storing an image tag
-                // var topicGif = $("<img>");
-        
-                //****** */
-                // Setting the src attribute of the image to a property pulled off the result item
-                // topicGif.attr("src", results[i].images.fixed_height_still.url);
-        
-                // set other attributes to allow playing and pausing of the gif
-                // topicGif.attr("data-still", results[i].images.fixed_height_still.url);
-                // topicGif.attr("data-animate", results[i].images.fixed_height.url);
-                // topicGif.attr("data-state", "still");
-                // topicGif.addClass("gif");
-        
-                // Appending the paragraph and image tag to the topicDiv
-                // topicDiv.append(topicGif);
-                // topicDiv.append(p);
-        
-                // Prependng the topicDiv to the HTML page in the "#gifs-appear-here" div
-                // $("#gifs-appear-here").prepend(topicDiv);
-                //****** */
-
                 // setting the src attribute of the name to a url from the result item
                 pName.attr("src", results[i].url);
+                console.log(results[i].url);
 
-                // Appending the paragraph and image tag to the trackDiv
+                // Appending the paragraph to the trackDiv
                 trackDiv.append(pName);
         
-                // Prependng the trackDiv to the HTML page in the "#gifs-appear-here" div
-                $("#top-songs").prepend(trackDiv);
+                // Prependng the trackDiv to the HTML page in the "#top-songs" div
+                $("#top-songs").append(trackDiv);
             }
-        });
 
+            topSong = results[0].name;
+            console.log("Top Song: " + topSong);
+
+//            bandInput.attr("top-song", topSong);
+
+        });
 
     }
 
-    // dynamically create the list of top songs from a last.fm api call
+    function addVideo() {
+        //Empty the div with the top-video ID
+        $("#top-video").empty();
 
-    // $("#top-songs") = ;
+
+        // youtube key: AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo
+        console.log("Artist: " + bandInput);
+        console.log("Top Song: " + topSong);
+        var queryURL2 = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + bandInput + " " + topSong + "&type=video&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo"; 
+
+        // Performing an AJAX request with the queryURL
+        $.ajax({
+        url: queryURL2,
+        method: "GET"
+        }).then(function(response) {
+            console.log("queryURL2: " + queryURL2);
+
+            console.log(response);
+
+
+            // Creating and storing a div tag
+            // var videoDiv = $("<div class='track'>");
+    
+            //var videoDiv = $("<iframe id="ytplayer" type="text/html" width="640" height="360"
+            //src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
+            //frameborder="0"></iframe>");
+
+
+            // // setting the src attribute of the name to a url from the result item
+            // pName.attr("src", results[i].url);
+
+            // // Appending the paragraph and image tag to the trackDiv
+            // trackDiv.append(pName);
+    
+            // Prependng the trackDiv to the HTML page in the "#gifs-appear-here" div
+            $("#top-video").prepend(videoDiv);
+
+        });
+
+        // //----------------------------code from YouTube
+        // // 2. This code loads the IFrame Player API code asynchronously.
+        // var tag = document.createElement('script');
+
+        // tag.src = "https://www.youtube.com/iframe_api";
+        // var firstScriptTag = document.getElementsByTagName('script')[0];
+        // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // // 3. This function creates an <iframe> (and YouTube player)
+        // //    after the API code downloads.
+        // var player;
+        // function onYouTubeIframeAPIReady() {
+        //     player = new YT.Player('top-video', {
+        //     height: '390',
+        //     width: '640',
+        //     videoId: 'M7lc1UVf-VE',
+        //     events: {
+        //         'onReady': onPlayerReady,
+        //         'onStateChange': onPlayerStateChange
+        //     }
+        //     });
+        // }
+
+        // // 4. The API will call this function when the video player is ready.
+        // function onPlayerReady(event) {
+        //     event.target.playVideo();
+        // }
+
+        // // 5. The API calls this function when the player's state changes.
+        // //    The function indicates that when playing a video (state=1),
+        // //    the player should play for six seconds and then stop.
+        // var done = false;
+        // function onPlayerStateChange(event) {
+        //     if (event.data == YT.PlayerState.PLAYING && !done) {
+        //     setTimeout(stopVideo, 6000);
+        //     done = true;
+        //     }
+        // }
+        // function stopVideo() {
+        //     player.stopVideo();
+        // }
+
+
+        
+    }
+
 
 });
