@@ -31,12 +31,13 @@ function displayGigs() {
         eventCity.text(response[i].venue.city + ", " + response[i].venue.region);
         var eventDate = $("<p>");
         eventDate.text(moment(response[i].datetime).format("LLLL"));
-        var displayEvent = $("<div>");
+        var displayEvent = $("<button>");
         displayEvent.append(eventCity);
         displayEvent.append(eventDate);
         displayEvent.attr("data-latitude", response[i].venue.latitude);
         displayEvent.attr("data-longitude", response[i].venue.longitude);
         displayEvent.attr("data-keyword", response[i].venue.name);
+        displayEvent.attr("data-city-state", response[i].venue.city + ", " + response[i].venue.region);
         displayEvent.addClass("click-venue");
         console.log(displayEvent);
         $("#search-results").append(displayEvent);
@@ -48,18 +49,39 @@ function displayGigs() {
 $("#submit-search").on("click", function() {
   console.log("CLICKED");
   // event.preventDefault();
+  $("#search-results").empty();
   displayGigs();
 })
-// $(".click-venue").on("click", function() {
-//   var venueLat = this.attr("data-latitude");
-//   var venueLong = this.attr("data-longitude");
-//   var venueName = this.attr("data-keyword");
-//   var queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo&radius=50&location=" +
-//     venueLat + "," + venueLong + "&keyword=" + venueName;
-//   $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//   }).then(function(response) {
 
-//   })
-// })
+$(document).on("click", ".click-venue", function() {
+  // var venueLat = $(this).attr("data-latitude");
+  // var venueLong = $(this).attr("data-longitude");
+  // var venueName = $(this).attr("data-keyword");
+  // var venueCityState = $(this).attr("data-city-state")
+  var venueQuery = $(this).attr("data-keyword") + " " + $(this).attr("data-city-state");
+  // var queryURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo&radius=50&location=" +
+  //   venueLat + "," + venueLong + "&keyword=" + venueName;
+  // $.ajax({
+  //   url: queryURL,
+  //   method: "GET"
+  // }).then(function(response) {
+
+  // })
+  $("#embed-venue").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" + 
+    venueQuery + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
+  $("#nearby-button").html("<button data-venue='" + venueQuery + 
+    "' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button data-venue='" + venueQuery + 
+    "' id='nearby-bars-button'>Show me nearby bars!</button>");
+});
+
+$(document).on("click", "#nearby-hotels-button", function() {
+  var searchReference = $(this).attr("data-venue");
+  $("#embed-nearby").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=hotels+near+" + 
+  searchReference + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
+});
+
+$(document).on("click", "#nearby-bars-button", function() {
+  var searchReference = $(this).attr("data-venue");
+  $("#embed-nearby").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=bars+near+" + 
+  searchReference + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
+});
