@@ -1,6 +1,9 @@
 // Javascript for Code that Dynamically Writes the Artist's Top Songs to the HTML
 
 // Add JS Code below
+var videoIdent = "";
+
+
 $(document).ready(function() {
 
     // clear out any prior song lists and videos
@@ -11,6 +14,7 @@ $(document).ready(function() {
     var bandInput = "";
     var results = "";
     var topSong = "";
+    // var videoIdent = "";
 
     $(".search-button").on("click", function() {
         console.log("Button clicked");
@@ -18,13 +22,16 @@ $(document).ready(function() {
         bandInput = $("#band-input").val().trim();
         console.log("Artist Requested: " + bandInput);
 
-        printSongs();
-        addVideo();
+        printSongs(getVideoId);
+
+        // addVideo();
+        
+        console.log("------ end of on-click -------------");
     });
 
 
 
-    function printSongs() {
+    function printSongs(callback) {
         //Empty the div with the top-songs ID
         $("#top-songs").empty();
     
@@ -42,6 +49,9 @@ $(document).ready(function() {
             results = response.toptracks.track;
             console.log(response.toptracks.track);
 
+            topSong = results[0].name;
+            console.log("Top Song: " + topSong);
+
             // Looping through the top 3 songs of each result
             for (var i = 0; i < 3; i++) {
 
@@ -49,7 +59,7 @@ $(document).ready(function() {
                 var trackDiv = $("<div class='track'>");
         
                 // Creating a paragraph tag with the result item's name
-                var pName = $("<p>").text("Number " + (i+1) + " Song: " + results[i].name);
+                var pName = $("<p>").text((i+1) + ") " + results[i].name);
         
                 // setting the src attribute of the name to a url from the result item
                 pName.attr("src", results[i].url);
@@ -62,16 +72,17 @@ $(document).ready(function() {
                 $("#top-songs").append(trackDiv);
             }
 
-            topSong = results[0].name;
-            console.log("Top Song: " + topSong);
+            //            bandInput.attr("top-song", topSong);
+            console.log("------ end of printSongs function -------------");
 
-//            bandInput.attr("top-song", topSong);
-
+            //RWS: have to call addVideo at the end of the ajax call (and not outside the ajax call) 
+            //to avoid addVideo being done before this ajax call is complete 
+            getVideoId();    
         });
 
     }
 
-    function addVideo() {
+    function getVideoId() {
         //Empty the div with the top-video ID
         $("#top-video").empty();
 
@@ -90,25 +101,51 @@ $(document).ready(function() {
 
             console.log(response);
 
+            videoIdent = response.items[0].id.videoId;
 
-            // Creating and storing a div tag
-            // var videoDiv = $("<div class='track'>");
-    
-            //var videoDiv = $("<iframe id="ytplayer" type="text/html" width="640" height="360"
-            //src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
-            //frameborder="0"></iframe>");
+            console.log("videoID: " + videoIdent);
 
+            // addVideo();
 
-            // // setting the src attribute of the name to a url from the result item
-            // pName.attr("src", results[i].url);
+            var tempUrl = "https://www.youtube.com/embed/" + videoIdent;
+            console.log("video src: " + tempUrl);
 
-            // // Appending the paragraph and image tag to the trackDiv
-            // trackDiv.append(pName);
-    
-            // Prependng the trackDiv to the HTML page in the "#gifs-appear-here" div
-            $("#top-video").prepend(videoDiv);
-
+            var videoDiv = $("<iframe id='video' type='text/html' width='320' height='200' frameborder='0'></iframe>");
+            videoDiv.attr("src", tempUrl);
+            $("#top-video").append(videoDiv);            
         });
+
+        console.log("------ end of addVideo function -------------");
+
+    }
+});
+    // function addVideo() {
+
+        // var tempUrl = "https://www.youtube.com/embed/" + videoIdent;
+        // console.log("video src: " + tempUrl);
+
+        // var videoDiv = $("<iframe id='video' type='text/html' width='320' height='180' src='https://www.youtube.com/embed/XmSdTa9kaiQ' frameborder='0'></iframe>");
+        // $("#top-video").append(videoDiv);
+
+
+        // // Load the IFrame Player API code asynchronously.
+        // var tag = document.createElement('script');
+        // tag.src = "https://www.youtube.com/player_api";
+        // var firstScriptTag = document.getElementsByTagName('script')[0];
+        // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // // Replace the 'ytplayer' element with an <iframe> and
+        // // YouTube player after the API code downloads.
+        // var player;
+        // function onYouTubePlayerAPIReady() {
+        //     player = new YT.Player('top-video', {
+        //     height: '360',
+        //     width: '640',
+        //     videoId: 'XmSdTa9kaiQ'
+        //     });
+        // }
+
+
 
         // //----------------------------code from YouTube
         // // 2. This code loads the IFrame Player API code asynchronously.
@@ -118,14 +155,16 @@ $(document).ready(function() {
         // var firstScriptTag = document.getElementsByTagName('script')[0];
         // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+        // console.log("videoID: " + videoIdent);
+
         // // 3. This function creates an <iframe> (and YouTube player)
         // //    after the API code downloads.
         // var player;
         // function onYouTubeIframeAPIReady() {
         //     player = new YT.Player('top-video', {
-        //     height: '390',
-        //     width: '640',
-        //     videoId: 'M7lc1UVf-VE',
+        //     height: '180',
+        //     width: '320',
+        //     videoId: videoIdent,
         //     events: {
         //         'onReady': onPlayerReady,
         //         'onStateChange': onPlayerStateChange
@@ -151,10 +190,6 @@ $(document).ready(function() {
         // function stopVideo() {
         //     player.stopVideo();
         // }
+    // }
 
-
-        
-    }
-
-
-});
+// });
