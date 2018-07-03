@@ -22,10 +22,8 @@ $(document).ready(function() {
         bandInput = $("#band-input").val().trim();
         console.log("Artist Requested: " + bandInput);
 
-        printSongs(getVideoId);
+        printSongs(addVideo);
 
-        // addVideo();
-        
         console.log("------ end of on-click -------------");
     });
 
@@ -35,7 +33,7 @@ $(document).ready(function() {
         //Empty the div with the top-songs ID
         $("#top-songs").empty();
     
-        var queryURL1 = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + bandInput + 
+        var queryURL1 = "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + bandInput + 
         "&api_key=8ebc9b04f203d069a8e6992620b4b37b&format=json";
         
         // Performing an AJAX request with the queryURL
@@ -77,12 +75,12 @@ $(document).ready(function() {
 
             //RWS: have to call addVideo at the end of the ajax call (and not outside the ajax call) 
             //to avoid addVideo being done before this ajax call is complete 
-            getVideoId();    
+            addVideo();    
         });
 
     }
 
-    function getVideoId() {
+    function addVideo() {
         //Empty the div with the top-video ID
         $("#top-video").empty();
 
@@ -98,19 +96,16 @@ $(document).ready(function() {
         method: "GET"
         }).then(function(response) {
             console.log("queryURL2: " + queryURL2);
-
             console.log(response);
 
             videoIdent = response.items[0].id.videoId;
 
             console.log("videoID: " + videoIdent);
 
-            // addVideo();
-
             var tempUrl = "https://www.youtube.com/embed/" + videoIdent;
             console.log("video src: " + tempUrl);
 
-            var videoDiv = $("<iframe id='video' type='text/html' width='320' height='200' frameborder='0'></iframe>");
+            var videoDiv = $("<iframe id='video' type='text/html' width='320' height='160' frameborder='0'></iframe>");
             videoDiv.attr("src", tempUrl);
             $("#top-video").append(videoDiv);            
         });
@@ -119,7 +114,7 @@ $(document).ready(function() {
 
     }
 });
-    // function addVideo() {
+
 
         // var tempUrl = "https://www.youtube.com/embed/" + videoIdent;
         // console.log("video src: " + tempUrl);
@@ -190,6 +185,3 @@ $(document).ready(function() {
         // function stopVideo() {
         //     player.stopVideo();
         // }
-    // }
-
-// });
