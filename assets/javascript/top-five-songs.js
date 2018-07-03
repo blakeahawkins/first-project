@@ -28,7 +28,7 @@ $(document).ready(function() {
         //Empty the div with the top-songs ID
         $("#top-songs").empty();
     
-        var queryURL1 = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + bandInput + 
+        var queryURL1 = "https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=" + bandInput + 
         "&api_key=8ebc9b04f203d069a8e6992620b4b37b&format=json";
         
         // Performing an AJAX request with the queryURL
