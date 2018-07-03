@@ -29,3 +29,6 @@ body {
 form {
     font-size: 12px;
 }
+button {
+    margin: 10px;
+}
