@@ -27,8 +27,14 @@ body {
 }
 
 form {
-    font-size: 12px;
+    font-size: 10px;
 }
+
+.form-control {
+    font-size: 10px;
+}
+
+
 button {
     margin: 10px;
 }
