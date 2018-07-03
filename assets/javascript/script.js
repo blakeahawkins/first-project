@@ -69,19 +69,19 @@ $(document).on("click", ".click-venue", function() {
   // })
   $("#embed-venue").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" + 
     venueQuery + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
-  $("#nearby-button").html("<button data-venue='" + venueQuery + 
-    "' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button data-venue='" + venueQuery + 
-    "' id='nearby-bars-button'>Show me nearby bars!</button>");
+  $("#nearby-button").html("<button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
+    "' data-toggle='modal' data-target='#hotels-modal' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
+    "' data-toggle='modal' data-target='#bars-modal' id='nearby-bars-button'>Show me nearby bars!</button>");
 });
 
 $(document).on("click", "#nearby-hotels-button", function() {
   var searchReference = $(this).attr("data-venue");
-  $("#embed-nearby").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=hotels+near+" + 
+  $("#hotels-map").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=hotels+near+" + 
   searchReference + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
 });
 
 $(document).on("click", "#nearby-bars-button", function() {
   var searchReference = $(this).attr("data-venue");
-  $("#embed-nearby").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=bars+near+" + 
+  $("#bars-map").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=bars+near+" + 
   searchReference + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
 });
