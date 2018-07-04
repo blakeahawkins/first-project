@@ -38,11 +38,11 @@ function displayGigs() {
   })
     .then(function (response) {
       for (i = 0; i < response.length; i++) {
-        var eventCity = $("<h3>");
+        var eventCity = $("<h5>");
         eventCity.text(response[i].venue.city + ", " + response[i].venue.region);
         var eventDate = $("<p>");
         eventDate.text(moment(response[i].datetime).format("LLLL"));
-        var displayEvent = $("<button>");
+        var displayEvent = $("<button class='btn-sm'>");
         displayEvent.append(eventCity);
         displayEvent.append(eventDate);
         displayEvent.attr("data-latitude", response[i].venue.latitude);
@@ -120,7 +120,7 @@ $(document).on("click", ".click-venue", function() {
   // })
   $("#embed-venue").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" + 
     venueQuery + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
-  $("#nearby-button").html("<button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
+  $("#nearby-button").html("<button class='btn btn-lg' data-venue='" + venueQuery + 
     "' data-toggle='modal' data-target='#hotels-modal' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
     "' data-toggle='modal' data-target='#bars-modal' id='nearby-bars-button'>Show me nearby bars!</button>");
 });

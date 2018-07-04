@@ -1,40 +1,83 @@
-body {
-    background-color: #579C87;
-    color: #FCCA46;
-
+a:link {
+    text-decoration: none;
 }
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+button:focus {
+    outline:0;
+}
+
+
+
 .navbar {
     font-family: 'Shrikhand', cursive;
     font-size: 48px;
 }
+body {
+    background-color: #579C87;
+    color: #FCCA46;
+    font-family: 'Lato', sans-serif;
 
+}
 .card {
     background-color: #233D4D;
     border-color: #FCCA46;
-    border-width: 3px;
+    border-width: 2px;
+    font-size: 14px;
 }
 
 .card-header {
-    font-family: 'Lato', sans-serif;
     font-size: 18px;
+    background-color: #233D4D;
 
 }
 
-.search-button {
+.btn, .btn-sm {
+    background-color:#579C87;
+    color: #FCCA46;
+    margin: 2px;
+    border: none;
+}
+
+form {
+    margin-bottom: 10px;
+}
+
+.form-control {
+    font-size: 10px;
+    background-color: #FCCA46;
+    color: #233D4D;
+    border-color: #579C87;
+}
+
+.form-row {
+    font-size: 10px;
+}
+
+.click-venue {
     background-color:#579C87;
     color: #FCCA46;
     margin: 2px;
 }
 
-form {
-    font-size: 10px;
+.badge-pill {
+    color: #FCCA46;
+    font-size: 18px;
+    background-color: #579C87;
+    margin: 3px;
 }
 
-.form-control {
-    font-size: 10px;
-}
-
-
-button {
-    margin: 10px;
+#nearby-hotels {
+    text-align: center;
 }

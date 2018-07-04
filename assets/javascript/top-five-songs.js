@@ -59,7 +59,7 @@ $(document).ready(function() {
                 var trackLink = $("<a>");
 
                 // Give the new anchor element some text
-                trackLink.text((i+1) + ") " + results[i].name);
+                trackLink.text((i+1) + ". " + results[i].name);
 
                 // Give the new anchor element an href attribute of the url from the result item
                 trackLink.attr("href", results[i].url);
@@ -67,7 +67,7 @@ $(document).ready(function() {
                 // Give the element an attribute to open a new window when clicking on the element
                 trackLink.attr("target", "_blank");
 
-                trackLink.addClass("badge badge-light");
+                trackLink.addClass("badge badge-pill");
 
                 console.log(results[i].url);
 
