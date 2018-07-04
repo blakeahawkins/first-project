@@ -18,23 +18,29 @@ button:focus {
     outline:0;
 }
 
-
-
 .navbar {
     font-family: 'Shrikhand', cursive;
     font-size: 48px;
 }
+
+#show-me {
+    font-family: 'Shrikhand', cursive;
+    font-size: 24px;
+    padding: 30px;
+}
+
 body {
     background-color: #579C87;
     color: #FCCA46;
     font-family: 'Lato', sans-serif;
+    
 
 }
 .card {
     background-color: #233D4D;
     border-color: #FCCA46;
     border-width: 2px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .card-header {
@@ -43,11 +49,18 @@ body {
 
 }
 
-.btn, .btn-sm {
+.btn {
     background-color:#579C87;
     color: #FCCA46;
-    margin: 2px;
-    border: none;
+    border-color:#233D4D;
+    
+}
+
+.btn-sm {
+    background-color:#579C87;
+    color: #FCCA46;
+    border-color:#233D4D;
+    
 }
 
 form {
@@ -65,19 +78,24 @@ form {
     font-size: 10px;
 }
 
-.click-venue {
-    background-color:#579C87;
-    color: #FCCA46;
-    margin: 2px;
+
+a {
+    color: inherit;
 }
 
-.badge-pill {
-    color: #FCCA46;
-    font-size: 18px;
-    background-color: #579C87;
-    margin: 3px;
+h5 {
+    font-size: 16px;
+    padding-top: 10px;
 }
 
-#nearby-hotels {
-    text-align: center;
+p {
+    font-size: 12px;
+}
+
+#search-results {
+    margin-bottom: 10px;
+}
+
+.min-height {
+    min-height: 300px;
 }

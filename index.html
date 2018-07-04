@@ -57,12 +57,12 @@
                                         <input type="text" class="form-control" id="band-input" placeholder="Radiohead" aria-label="Search Band" aria-describedby="basic-addon2">
                                     </div>
                                 </div>
-                                <div class="col">
+                              <!--  <div class="col">
                                     <p>City <input type="checkbox" value="use-current" checked> Use Current</p>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" id="location-input" placeholder="Kansas City" aria-label="Search Location" aria-describedby="basic-addon2">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="form-row">
                                 <div class="col">
@@ -84,6 +84,11 @@
                         </form>
                 </div> 
 
+                 <div class="card col-md-4 embed-responsive min-height">
+                    <div class="card-header">Top Song Video</div>
+                    <div class="card-body" id="top-video"></div>
+                </div>
+
                 <div class="card col-md-4">
                     <div class="card-header">Top 3 Songs (from last.fm)</div>
                     <div class="card-body" id="top-songs"></div>
@@ -91,37 +96,39 @@
                
                 
             
-                <div class="card col-md-4 embed-responsive">
-                    <div class="card-header">Top Song Video</div>
-                    <div class="card-body" id="top-video"></div>
-                </div>
+               
         </div> <!--ends row 2-->
         
         <div class="row"> <!--starts row 3-->
+            
             <div class="card col-md-8">
                 <div class="card-header">Search Results</div>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <div id="search-results"></div>
-                    </br>
                 </div>
             </div>    
+           
             <div class="card col-md-4" >
-                <div class="card-header">Previous Search</div>
-                <div id="previous-artists"></div>
-                <!-- <button id="clear-list" class="btn clear-button" type="button">Clear List</button> -->
-                
+                <div class="card-header">Previous Searches</div>
+                <div class="card-body" id="previous-artists"></div>
+                <!-- <button id="clear-list" class="btn clear-button" type="button">Clear List</button> -->   
             </div>
         </div>  <!--ends row 3-->
 
         <div class="row"> <!--starts row 4-->
             <div class="card col-md-12">
-                <div class="card-header">Map of Venue</div>
-                </br>
+                <div class="card-header">Map of Venue</div> 
                 <div class="row">
-                    <div class="card col-md-8" id="embed-venue"></div>
-                    <div class="card col-md-4" id="nearby-button"></div>
+                    <div class="card col-md-8 embed-responsive min-height" id="embed-venue"></div>
+                    <div class="card col-md-4">
+                        <div>
+                            <div id="show-me">Where can we get a drink around here?</div>
+                        </div>
+                        <div>
+                            <div id="nearby-div"></div>
+                        </div>
+                    </div>
                 </div>
-                </br>
             </div>    
         </div>  <!--ends row 4-->
 
