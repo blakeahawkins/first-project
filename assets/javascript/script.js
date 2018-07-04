@@ -1,14 +1,25 @@
  // Initialize Firebase
- var config = {
-    apiKey: "AIzaSyCLXyUhUnq6KT3IOsYNvWKYtnrGVXqZt08",
-    authDomain: "nrfpc-fdbbd.firebaseapp.com",
-    databaseURL: "https://nrfpc-fdbbd.firebaseio.com",
-    projectId: "nrfpc-fdbbd",
-    storageBucket: "nrfpc-fdbbd.appspot.com",
-    messagingSenderId: "455767813152"
-  };
+//  var config = {
+//     apiKey: "AIzaSyCLXyUhUnq6KT3IOsYNvWKYtnrGVXqZt08",
+//     authDomain: "nrfpc-fdbbd.firebaseapp.com",
+//     databaseURL: "https://nrfpc-fdbbd.firebaseio.com",
+//     projectId: "nrfpc-fdbbd",
+//     storageBucket: "nrfpc-fdbbd.appspot.com",
+//     messagingSenderId: "455767813152"
+//   };
+
+var config = {
+  apiKey: "AIzaSyCnGXOVqempZj1dED-p5ECHUexvHzFt-wU",
+  authDomain: "my-first-firebase-projec-250a7.firebaseapp.com",
+  databaseURL: "https://my-first-firebase-projec-250a7.firebaseio.com",
+  projectId: "my-first-firebase-projec-250a7",
+  storageBucket: "my-first-firebase-projec-250a7.appspot.com",
+  messagingSenderId: "62207198057"
+};
+
   firebase.initializeApp(config);
 
+  var database = firebase.database();
 
 
 function displayGigs() {
@@ -46,11 +57,57 @@ function displayGigs() {
     // console.log(displayEvent);
 }
 
+// this function adds a new artist from the input boxes as a new child object in firebase
+function addArtist() {
+  // remove what is in the database
+  database.ref().remove();
+
+  // grab the artist in the input box
+  var artistName = $("#band-input").val().trim();
+
+  database.ref().push({
+    artistName: artistName
+  });
+}
+
+// this method senses when a new artist is added to firebase and updates the list of previous artists
+database.ref().on("child_added", function(childSnapshot) {
+  $("#previous-artists").empty();
+
+  // Log stuff from snapshot
+  console.log("artistName: " + childSnapshot.val().artistName);
+  console.log("dateAdded: " + childSnapshot.val().dateAdded);
+  
+  // create a new div to receive the artist name
+  var previousArtist = $("<div id='single-artist'>");
+
+  // add the text of the artist name to the div
+  previousArtist.text(childSnapshot.val().artistName);
+
+  // append the artist name to the html
+  $("#previous-artists").append(previousArtist);
+});
+
+// // Click on artist name from previous artist list to reload the artist and search again
+// $("#previous-artists").on("click", function() {
+//   // var tempName = $(this).attr("data-state")
+//   $("#band-input").text(this);
+//   // ("#band-input").text(tempName);
+//   // printSongs(addVideo);
+//   // displayGigs();
+// })
+
+// // Click the button to clear list of previous artists 
+// $("#clear-list").on("click", function() {
+//   database.ref().remove();
+// })
+
 $("#submit-search").on("click", function() {
   console.log("CLICKED");
   // event.preventDefault();
   $("#search-results").empty();
   displayGigs();
+  addArtist();
 })
 
 $(document).on("click", ".click-venue", function() {
@@ -69,19 +126,19 @@ $(document).on("click", ".click-venue", function() {
   // })
   $("#embed-venue").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" + 
     venueQuery + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
-  $("#nearby-button").html("<button data-venue='" + venueQuery + 
-    "' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button data-venue='" + venueQuery + 
-    "' id='nearby-bars-button'>Show me nearby bars!</button>");
+  $("#nearby-button").html("<button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
+    "' data-toggle='modal' data-target='#hotels-modal' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
+    "' data-toggle='modal' data-target='#bars-modal' id='nearby-bars-button'>Show me nearby bars!</button>");
 });
 
 $(document).on("click", "#nearby-hotels-button", function() {
   var searchReference = $(this).attr("data-venue");
-  $("#embed-nearby").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=hotels+near+" + 
+  $("#hotels-map").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=hotels+near+" + 
   searchReference + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
 });
 
 $(document).on("click", "#nearby-bars-button", function() {
   var searchReference = $(this).attr("data-venue");
-  $("#embed-nearby").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=bars+near+" + 
+  $("#bars-map").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?q=bars+near+" + 
   searchReference + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
 });

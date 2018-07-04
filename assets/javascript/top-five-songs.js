@@ -3,7 +3,6 @@
 // Add JS Code below
 var videoIdent = "";
 
-
 $(document).ready(function() {
 
     // clear out any prior song lists and videos
@@ -55,16 +54,25 @@ $(document).ready(function() {
 
                 // Creating and storing a div tag
                 var trackDiv = $("<div class='track'>");
-        
-                // Creating a paragraph tag with the result item's name
-                var pName = $("<p>").text((i+1) + ") " + results[i].name);
-        
-                // setting the src attribute of the name to a url from the result item
-                pName.attr("src", results[i].url);
+
+                // Create a new anchor tag with the result item's name
+                var trackLink = $("<a>");
+
+                // Give the new anchor element some text
+                trackLink.text((i+1) + ") " + results[i].name);
+
+                // Give the new anchor element an href attribute of the url from the result item
+                trackLink.attr("href", results[i].url);
+
+                // Give the element an attribute to open a new window when clicking on the element
+                trackLink.attr("target", "_blank");
+
+                trackLink.addClass("badge badge-light");
+
                 console.log(results[i].url);
 
                 // Appending the paragraph to the trackDiv
-                trackDiv.append(pName);
+                trackDiv.append(trackLink);
         
                 // Prependng the trackDiv to the HTML page in the "#top-songs" div
                 $("#top-songs").append(trackDiv);
@@ -114,74 +122,3 @@ $(document).ready(function() {
 
     }
 });
-
-
-        // var tempUrl = "https://www.youtube.com/embed/" + videoIdent;
-        // console.log("video src: " + tempUrl);
-
-        // var videoDiv = $("<iframe id='video' type='text/html' width='320' height='180' src='https://www.youtube.com/embed/XmSdTa9kaiQ' frameborder='0'></iframe>");
-        // $("#top-video").append(videoDiv);
-
-
-        // // Load the IFrame Player API code asynchronously.
-        // var tag = document.createElement('script');
-        // tag.src = "https://www.youtube.com/player_api";
-        // var firstScriptTag = document.getElementsByTagName('script')[0];
-        // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // // Replace the 'ytplayer' element with an <iframe> and
-        // // YouTube player after the API code downloads.
-        // var player;
-        // function onYouTubePlayerAPIReady() {
-        //     player = new YT.Player('top-video', {
-        //     height: '360',
-        //     width: '640',
-        //     videoId: 'XmSdTa9kaiQ'
-        //     });
-        // }
-
-
-
-        // //----------------------------code from YouTube
-        // // 2. This code loads the IFrame Player API code asynchronously.
-        // var tag = document.createElement('script');
-
-        // tag.src = "https://www.youtube.com/iframe_api";
-        // var firstScriptTag = document.getElementsByTagName('script')[0];
-        // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // console.log("videoID: " + videoIdent);
-
-        // // 3. This function creates an <iframe> (and YouTube player)
-        // //    after the API code downloads.
-        // var player;
-        // function onYouTubeIframeAPIReady() {
-        //     player = new YT.Player('top-video', {
-        //     height: '180',
-        //     width: '320',
-        //     videoId: videoIdent,
-        //     events: {
-        //         'onReady': onPlayerReady,
-        //         'onStateChange': onPlayerStateChange
-        //     }
-        //     });
-        // }
-
-        // // 4. The API will call this function when the video player is ready.
-        // function onPlayerReady(event) {
-        //     event.target.playVideo();
-        // }
-
-        // // 5. The API calls this function when the player's state changes.
-        // //    The function indicates that when playing a video (state=1),
-        // //    the player should play for six seconds and then stop.
-        // var done = false;
-        // function onPlayerStateChange(event) {
-        //     if (event.data == YT.PlayerState.PLAYING && !done) {
-        //     setTimeout(stopVideo, 6000);
-        //     done = true;
-        //     }
-        // }
-        // function stopVideo() {
-        //     player.stopVideo();
-        // }
