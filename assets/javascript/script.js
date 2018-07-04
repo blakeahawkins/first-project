@@ -59,7 +59,12 @@ function displayGigs() {
 
 // this function adds a new artist from the input boxes as a new child object in firebase
 function addArtist() {
+  // remove what is in the database
+  database.ref().remove();
+
+  // grab the artist in the input box
   var artistName = $("#band-input").val().trim();
+
   database.ref().push({
     artistName: artistName
   });
@@ -67,6 +72,7 @@ function addArtist() {
 
 // this method senses when a new artist is added to firebase and updates the list of previous artists
 database.ref().on("child_added", function(childSnapshot) {
+  $("#previous-artists").empty();
 
   // Log stuff from snapshot
   console.log("artistName: " + childSnapshot.val().artistName);
@@ -93,7 +99,7 @@ database.ref().on("child_added", function(childSnapshot) {
 
 // // Click the button to clear list of previous artists 
 // $("#clear-list").on("click", function() {
-//   database.childSnapshot.ref().remove();
+//   database.ref().remove();
 // })
 
 $("#submit-search").on("click", function() {
