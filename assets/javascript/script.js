@@ -108,9 +108,13 @@ $("#submit-search").on("click", function() {
   $("#search-results").empty();
   displayGigs();
   addArtist();
+  $(".show-on-click").show();
 })
 
+
+
 $(document).on("click", ".click-venue", function() {
+  $(".show-on-click-venue").show();
   // var venueLat = $(this).attr("data-latitude");
   // var venueLong = $(this).attr("data-longitude");
   // var venueName = $(this).attr("data-keyword");
@@ -122,13 +126,14 @@ $(document).on("click", ".click-venue", function() {
   //   url: queryURL,
   //   method: "GET"
   // }).then(function(response) {
-
+    
   // })
   $("#embed-venue").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" + 
     venueQuery + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");
-  $("#nearby-div").html("<button class='btn btn-sm' data-venue='" + venueQuery + 
-    "' data-toggle='modal' data-target='#hotels-modal' id='nearby-hotels-button'>Show me nearby hotels!</button><br><button class='btn btn-secondary btn-lg' data-venue='" + venueQuery + 
-    "' data-toggle='modal' data-target='#bars-modal' id='nearby-bars-button'>Show me nearby bars!</button>");
+  $("#nearby-hotels-div").html("<button class='btn btn-sm' data-venue='" + venueQuery + 
+    "' data-toggle='modal' data-target='#hotels-modal' id='nearby-hotels-button'>Nearby hotels!</button>");
+  $("#nearby-bars-div").html("<button class='btn btn-sm' data-venue='" + venueQuery + 
+    "' data-toggle='modal' data-target='#bars-modal' id='nearby-bars-button'>Nearby bars!</button>");
 });
 
 $(document).on("click", "#nearby-hotels-button", function() {

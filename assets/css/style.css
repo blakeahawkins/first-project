@@ -1,5 +1,6 @@
 a:link {
     text-decoration: none;
+    background-color: transparent;
 }
 
 a:visited {
@@ -7,11 +8,16 @@ a:visited {
 }
 
 a:hover {
-    text-decoration: none;
+    color: inherit;
+    text-decoration: underline;
 }
 
 a:active {
-    text-decoration: none;
+    text-decoration: underline;
+}
+
+.no-display {
+    display: none;
 }
 
 button:focus {
@@ -20,13 +26,13 @@ button:focus {
 
 .navbar {
     font-family: 'Shrikhand', cursive;
-    font-size: 48px;
+    font-size: 60px;
 }
 
 #show-me {
     font-family: 'Shrikhand', cursive;
     font-size: 24px;
-    padding: 30px;
+    padding: 15px;
 }
 
 body {
@@ -39,14 +45,13 @@ body {
 .card {
     background-color: #233D4D;
     border-color: #FCCA46;
-    border-width: 2px;
+    border-width: 1px;
     font-size: 12px;
 }
 
 .card-header {
     font-size: 18px;
     background-color: #233D4D;
-
 }
 
 .btn {
@@ -64,7 +69,7 @@ body {
 }
 
 form {
-    margin-bottom: 10px;
+    margin: 0px 15px 20px;
 }
 
 .form-control {
@@ -76,11 +81,6 @@ form {
 
 .form-row {
     font-size: 10px;
-}
-
-
-a {
-    color: inherit;
 }
 
 h5 {
@@ -99,3 +99,16 @@ p {
 .min-height {
     min-height: 300px;
 }
+
+#nearby-div {
+    text-align: center
+}
+
+.btn-songs {
+    background-color:#579C87;
+    color: #FCCA46;
+    border-color:#233D4D;
+    font-size: 24px;
+}
+
+
