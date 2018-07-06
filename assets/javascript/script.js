@@ -108,9 +108,13 @@ $("#submit-search").on("click", function() {
   $("#search-results").empty();
   displayGigs();
   addArtist();
+  $(".show-on-click").show();
 })
 
+
+
 $(document).on("click", ".click-venue", function() {
+  $(".show-on-click-venue").show();
   // var venueLat = $(this).attr("data-latitude");
   // var venueLong = $(this).attr("data-longitude");
   // var venueName = $(this).attr("data-keyword");
@@ -122,7 +126,7 @@ $(document).on("click", ".click-venue", function() {
   //   url: queryURL,
   //   method: "GET"
   // }).then(function(response) {
-
+    
   // })
   $("#embed-venue").html("<iframe width='100%' height='400px' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?q=" + 
     venueQuery + "&key=AIzaSyCN6p-zygNG_t-KHdAHG_juKUT_X_AMFYo' allowfullscreen></iframe>");

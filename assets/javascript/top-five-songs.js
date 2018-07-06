@@ -53,7 +53,7 @@ $(document).ready(function() {
             for (var i = 0; i < 3; i++) {
 
                 // Creating and storing a div tag
-                var trackDiv = $("<h5>");
+                var trackDiv = $("<h3>");
 
                 // Create a new anchor tag with the result item's name
                 var trackLink = $("<a>");
@@ -67,7 +67,7 @@ $(document).ready(function() {
                 // Give the element an attribute to open a new window when clicking on the element
                 trackLink.attr("target", "_blank");
 
-                trackLink.addClass("btn-sm");
+                trackLink.addClass("btn-sm btn-songs");
 
                 console.log(results[i].url);
 
